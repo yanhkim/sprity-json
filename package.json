@@ -1,0 +1,29 @@
+{
+  "name": "sprity-json",
+  "version": "0.0.1",
+  "description": "json style processor for sprity",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yanhkim/sprity-json.git"
+  },
+  "keywords": [
+    "sprity"
+  ],
+  "author": {
+    "name": "Namhoon Kim",
+    "email": "yanhkim@gmail.com"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/yanhkim/sprity-json/issues"
+  },
+  "homepage": "https://github.com/yanhkim/sprity-json#readme",
+  "dependencies": {
+    "bluebird": "^3.0.5",
+    "fs-extra": "^0.26.0"
+  }
+}

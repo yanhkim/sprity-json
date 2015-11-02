@@ -1,0 +1,25 @@
+[
+{{#each layouts}}
+  {
+    "sprites": [
+    {{#each sprites}}
+      {
+        "filename": "{{name}}.{{type}}",
+        "width": {{width}},
+        "height": {{height}}
+      }{{^last}},{{/last}}
+    {{/each}}
+    ],
+    "tiles": {
+    {{#each layout.items}}
+      "{{meta.fileName}}": {
+        "width": {{width}},
+        "height": {{height}},
+        "x": {{x}},
+        "y": {{y}}
+      }{{^last}},{{/last}}
+    {{/each}}
+    }
+  }{{^last}},{{/last}}
+{{/each}}
+]
