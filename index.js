@@ -17,11 +17,13 @@ var transform = Promise.method(function (layouts, source, opt, Handlebars) {
 
 module.exports = {
   process: function (layouts, opt, Handlebars) {
-    layouts.forEach(function (l) {
+    layouts.forEach(function (l, idx) {
       l.layout.items[l.layout.items.length - 1].last = true;
       l.sprites[l.sprites.length - 1].last = true;
+      if (idx === layouts.length - 1) {
+        l.last = true;
+      }
     });
-    layouts[layouts.length - 1].last = true;
     return getTemplate()
       .then(function (source) {
         return transform(layouts, source, opt, Handlebars);
