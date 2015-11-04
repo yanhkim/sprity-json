@@ -16,28 +16,37 @@ var transform = Promise.method(function (sprites, tiles, source, Handlebars) {
   });
 });
 
+function makeSprite(data) {
+  return {
+    name: data.name + '.' + data.type,
+    width: data.width,
+    height: data.height
+  };
+}
+
+function makeTile(item, sprite) {
+  var margin = (item.height - item.meta.height) / 2;
+  return {
+    name: item.meta.fileName,
+    width: item.meta.width,
+    height: item.meta.height,
+    x: item.x + margin,
+    y: item.y + margin,
+    sprite: sprite.name + '.' + sprite.type
+  };
+}
+
 module.exports = {
   process: function (layouts, opt, Handlebars) {
     var sprites = [];
     var tiles = [];
     var tileNames = {};
     layouts.forEach(function (layout) {
-      layout.sprites.forEach(function (sprite) {
-        sprites.push({
-          name: sprite.name + '.' + sprite.type,
-          width: sprite.width,
-          height: sprite.height
-        });
+      layout.sprites.forEach(function (data) {
+        sprites.push(makeSprite(data));
       });
       layout.layout.items.forEach(function (item) {
-        tiles.push({
-          name: item.meta.fileName,
-          width: item.width,
-          height: item.height,
-          x: item.x,
-          y: item.y,
-          sprite: layout.sprites[0].name + '.' + layout.sprites[0].type
-        });
+        tiles.push(makeTile(item, layout.sprites[0]));
         if (tileNames[item.meta.fileName]) {
           throw new Error('same tile image turned up');
         }
