@@ -8,25 +8,46 @@ var getTemplate = function () {
   return fs.readFileAsync(path.join(__dirname, 'template', 'json.hbs'), 'utf8');
 };
 
-var transform = Promise.method(function (layouts, source, opt, Handlebars) {
+var transform = Promise.method(function (sprites, tiles, source, Handlebars) {
   var template = Handlebars.compile(source);
   return template({
-    layouts: layouts
+    sprites: sprites,
+    tiles: tiles
   });
 });
 
 module.exports = {
   process: function (layouts, opt, Handlebars) {
-    layouts.forEach(function (l, idx) {
-      l.layout.items[l.layout.items.length - 1].last = true;
-      l.sprites[l.sprites.length - 1].last = true;
-      if (idx === layouts.length - 1) {
-        l.last = true;
-      }
+    var sprites = [];
+    var tiles = [];
+    layouts.forEach(function (layout) {
+      layout.sprites.forEach(function (sprite) {
+        sprites.push({
+          name: sprite.name + '.' + sprite.type,
+          width: sprite.width,
+          height: sprite.height
+        });
+      });
+      layout.layout.items.forEach(function (item) {
+        tiles.push({
+          name: item.meta.fileName,
+          width: item.width,
+          height: item.height,
+          x: item.x,
+          y: item.y,
+          sprite: layout.sprites[0].name + '.' + layout.sprites[0].type
+        });
+      });
     });
+    if (sprites.length) {
+      sprites[sprites.length - 1].last = true;
+    }
+    if (tiles.length) {
+      tiles[tiles.length - 1].last = true;
+    }
     return getTemplate()
       .then(function (source) {
-        return transform(layouts, source, opt, Handlebars);
+        return transform(sprites, tiles, source, Handlebars);
       });
   },
   isBeautifyable: function () {

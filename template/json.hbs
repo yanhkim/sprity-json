@@ -1,25 +1,21 @@
-[
-{{#each layouts}}
-  {
-    "sprites": [
-    {{#each sprites}}
-      {
-        "filename": "{{name}}.{{type}}",
-        "width": {{width}},
-        "height": {{height}}
-      }{{^last}},{{/last}}
-    {{/each}}
-    ],
-    "tiles": {
-    {{#each layout.items}}
-      "{{meta.fileName}}": {
-        "width": {{width}},
-        "height": {{height}},
-        "x": {{x}},
-        "y": {{y}}
-      }{{^last}},{{/last}}
-    {{/each}}
-    }
-  }{{^last}},{{/last}}
-{{/each}}
-]
+{
+  "sprites": {
+  {{#each sprites}}
+    "{{name}}": {
+      "width": {{width}},
+      "height": {{height}}
+    }{{^last}},{{/last}}
+  {{/each}}
+  },
+  "tiles": {
+  {{#each tiles}}
+    "{{name}}": {
+      "width": {{width}},
+      "height": {{height}},
+      "x": {{x}},
+      "y": {{y}},
+      "sprite": "{{sprite}}"
+    }{{^last}},{{/last}}
+  {{/each}}
+  }
+}
