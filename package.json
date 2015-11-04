@@ -21,9 +21,17 @@
   "bugs": {
     "url": "https://github.com/yanhkim/sprity-json/issues"
   },
+  "scripts": {
+    "test": "mocha --reporter spec"
+  },
   "homepage": "https://github.com/yanhkim/sprity-json#readme",
   "dependencies": {
     "bluebird": "^3.0.5",
     "fs-extra": "^0.26.0"
+  },
+  "devDependencies": {
+    "chai": "^3.4.0",
+    "handlebars": "^4.0.4",
+    "mocha": "^2.3.3"
   }
 }

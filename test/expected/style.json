@@ -1,0 +1,24 @@
+{
+  "sprites": {
+    "sprite.png": {
+      "width": 520,
+      "height": 656
+    }
+  },
+  "tiles": {
+    "png.png": {
+      "width": 136,
+      "height": 136,
+      "x": 0,
+      "y": 0,
+      "sprite": "sprite.png"
+    },
+    "jpg.jpg": {
+      "width": 520,
+      "height": 520,
+      "x": 0,
+      "y": 136,
+      "sprite": "sprite.png"
+    }
+  }
+}

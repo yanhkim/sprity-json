@@ -20,6 +20,7 @@ module.exports = {
   process: function (layouts, opt, Handlebars) {
     var sprites = [];
     var tiles = [];
+    var tileNames = {};
     layouts.forEach(function (layout) {
       layout.sprites.forEach(function (sprite) {
         sprites.push({
@@ -37,6 +38,10 @@ module.exports = {
           y: item.y,
           sprite: layout.sprites[0].name + '.' + layout.sprites[0].type
         });
+        if (tileNames[item.meta.fileName]) {
+          throw new Error('same tile image turned up');
+        }
+        tileNames[item.meta.fileName] = true;
       });
     });
     if (sprites.length) {
